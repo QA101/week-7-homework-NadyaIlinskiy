@@ -7,6 +7,7 @@ public class GreetingsUtilTest {
 	static GreetingsUtil gu;
 	
 	
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		gu = new GreetingsUtil();
@@ -29,7 +30,63 @@ public class GreetingsUtilTest {
 
 	@Test
 	public void test() {
-		fail("your tests here");
+		//fail("your tests here");
 	}
-
+	
+	
+	@Test
+	public void testChangeState() {
+		String expected = "coming";
+		String actual = gu.currentState;
+		assertTrue("Expected: " + expected + " Actual: "+actual, expected.equals(actual));		
+		
+		expected = "going";
+		gu.ChangeState();
+		actual = gu.currentState;
+		assertTrue("Expected: " + expected + " Actual: "+actual, expected.equals(actual));
+		
+		expected = "coming";
+		gu.ChangeState();
+		actual = gu.currentState;
+		assertTrue("Expected: " + expected + " Actual: "+actual, expected.equals(actual));
+	}
+	
+	@Test
+	public void testHello() {
+		String expected;
+		String actual;
+		String state = gu.currentState;
+		if (state.equals("coming")) {
+			expected = "You already said that";
+			actual = gu.Hello();
+			assertEquals("Expected: " + expected + " Actual: "+actual, expected, actual); 
+		} else {
+			expected = "Hi !";
+			actual = gu.Hello();
+			assertEquals("Expected: " + expected + " Actual: "+actual, expected, actual);
+			expected = "coming";
+			actual = gu.currentState;
+			assertEquals("Expected: " + expected + " Actual: "+actual, expected, actual);
+			}
+		}
+		
+		public void testGoodBye() {
+			String expected;
+			String actual;
+			String state = gu.currentState;
+			if (state.equals("going")) {
+				expected = "You already said that";
+				actual = gu.Hello();
+				assertEquals("Expected: " + expected + " Actual: "+actual, expected, actual); 
+			} else {
+				expected = "bye";
+				actual = gu.Hello();
+				assertEquals("Expected: " + expected + " Actual: "+actual, expected, actual);
+				expected = "going";
+				actual = gu.currentState;
+				assertEquals("Expected: " + expected + " Actual: "+actual, expected, actual);
+				
+					}
+		
+			}
 }
